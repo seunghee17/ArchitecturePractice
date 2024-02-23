@@ -31,3 +31,10 @@ jobs:
       with:
         name: app
         path: app/build/outputs/apk/debug/app-debug.apk
+    - name: Slack - Send Msg
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{job.status}}
+        fields: workflow,commit,repo,author,job,ref,took
+      env:
+        SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
