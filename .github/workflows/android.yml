@@ -34,8 +34,13 @@ jobs:
     - name: Slack - Send Msg
       uses: 8398a7/action-slack@v3
       with:
-        status: ${{job.status}}
+        status: custom
         fields: workflow,commit,repo,author,job,ref,took
-        name: '안드로이드 배포 시작합니다🥳'
+        custom_payload: |
+          {
+            attachments:[{
+              text: `안드로이드 배포 시작합니다🥳`
+            }]
+          }
       env:
         SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
